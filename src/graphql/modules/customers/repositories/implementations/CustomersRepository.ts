@@ -15,7 +15,7 @@ class CustomersRepository implements ICustomersRepository {
     return await this.repository.find();
   }
 
-  async findById(id: number): Promise<Customer | null> {
+  async findById(id: number): Promise<Customer | undefined> {
     return await this.repository.findOne(id);
   }
 

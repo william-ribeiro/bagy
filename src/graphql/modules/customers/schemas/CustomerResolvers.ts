@@ -13,8 +13,8 @@ export class CustomerResolvers {
   }
 
   @Query(() => Customer, { nullable: true })
-  custumer(@Arg('customerId') customerId: number) {
-    return this.customersRepository.findById(customerId);
+  async custumer(@Arg('customerId') customerId: number) {
+    return await this.customersRepository.findById(customerId);
   }
 
   @Mutation(() => Customer)

@@ -2,7 +2,7 @@ import { resolve } from 'path';
 
 const development = {
   type: 'sqlite',
-  logging: ['query', 'error'],
+  logging: true,
   database: resolve(__dirname, 'src', 'database', 'db', 'bagy.sqlite'),
   migrations: [resolve(__dirname, 'src', 'database', 'migrations', '*.ts')],
   entities: [resolve(__dirname, 'src', 'graphql', 'modules', '**', '*.ts')],
