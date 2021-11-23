@@ -1,0 +1,20 @@
+services:
+  createMigration:
+    image: node:alpine
+    container_name: migrator
+    volumes:
+      - ${PWD}/:/home/node/app
+    working_dir: /home/node/app
+    command: yarn migration:run
+    environment:
+      NODE_ENV: development
+  revertMigration:
+    image: node:alpine
+    container_name: migrator
+    volumes:
+      - ${PWD}/:/home/node/app
+    working_dir: /home/node/app
+    command: yarn migration:revert
+    environment:
+      NODE_ENV: development
+   
