@@ -4,14 +4,15 @@ import './shared/container';
 import { cconnection } from './database';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 import { CustomerResolvers } from './modules/customers/graphql/CustomerResolvers';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { ProductsResolvers } from './modules/products/graphql/CustomerResolvers';
 
 async function bootstrap() {
   cconnection();
   const schema = await buildSchema({
-    resolvers: [CustomerResolvers],
+    resolvers: [CustomerResolvers, ProductsResolvers],
   });
 
   const server = new ApolloServer({

@@ -3,7 +3,7 @@ import { AppError } from '../../../errors/AppError';
 import { ICustomersRepository } from '../repositories/ICustomersRepository';
 
 @injectable()
-export class DeleteUserUseCase {
+export class DeleteCustomerUseCase {
   constructor(
     @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
