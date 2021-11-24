@@ -1,12 +1,12 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, ID, ObjectType } from 'type-graphql';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@ObjectType()
 @Entity('customers')
-export class Customer extends BaseEntity {
+@ObjectType()
+export class Customer {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  readonly id: number;
+  id: number;
 
   @CreateDateColumn()
   @Field(() => Date)
@@ -28,35 +28,35 @@ export class Customer extends BaseEntity {
   @Field(() => String)
   cpf: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   birth_date: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   street: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   street_number: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   district: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   city: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   zip_code: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
   state: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field(() => String)
-  country: string;
+  country: string | null = null;
 }

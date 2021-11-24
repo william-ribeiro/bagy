@@ -2,10 +2,9 @@ import { resolve } from 'path';
 
 const development = {
   type: 'sqlite',
-  logging: true,
   database: resolve(__dirname, 'src', 'database', 'db', 'bagy.sqlite'),
   migrations: [resolve(__dirname, 'src', 'database', 'migrations', '*.ts')],
-  entities: [resolve(__dirname, 'src', 'graphql', 'modules', '**', '*.ts')],
+  entities: [resolve(__dirname, 'src', 'modules', '**', '*.ts')],
   cli: {
     migrationsDir: resolve(__dirname, 'src', 'database', 'migrations'),
   },
