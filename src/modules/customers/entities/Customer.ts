@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Order } from '../../orders/entities/Order';
 
 @Entity('customers')
 @ObjectType()
@@ -59,4 +60,8 @@ export class Customer {
   @Column({ nullable: true })
   @Field(() => String)
   country: string | null = null;
+
+  // @OneToMany(() => Order, (order) => order.customer)
+  // @Field(() => [Order])
+  // order: Order[];
 }

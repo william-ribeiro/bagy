@@ -8,7 +8,7 @@ export class ProductInput {
   name: string;
 
   @Field(() => String)
-  img_url: string;
+  image_url: string;
 
   @Field(() => String)
   description: string;

@@ -23,8 +23,8 @@ export class ProductsRepository implements IProductsRepository {
     return this.repository.findOne({ id });
   }
 
-  public async update(Product: IProductDTO): Promise<Product> {
-    return this.repository.save(Product);
+  public async update(product: IProductDTO): Promise<Product> {
+    return this.repository.save(product);
   }
 
   public async create(data: IProductDTO): Promise<Product> {

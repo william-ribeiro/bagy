@@ -7,12 +7,13 @@ import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 import { CustomerResolvers } from './modules/customers/graphql/CustomerResolvers';
-import { ProductsResolvers } from './modules/products/graphql/CustomerResolvers';
+import { ProductsResolvers } from './modules/products/graphql/ProductResolvers';
+import { OrderResolvers } from './modules/orders/graphql/OrderResolvers';
 
 async function bootstrap() {
   cconnection();
   const schema = await buildSchema({
-    resolvers: [CustomerResolvers, ProductsResolvers],
+    resolvers: [CustomerResolvers, ProductsResolvers, OrderResolvers],
   });
 
   const server = new ApolloServer({

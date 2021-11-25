@@ -1,5 +1,6 @@
 import { Field, ID, Int, Float, ObjectType } from 'type-graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderProduct } from '../../orders/entities/OrderProduct';
 
 @Entity('products')
 @ObjectType()
@@ -22,7 +23,7 @@ export class Product {
 
   @Column()
   @Field(() => String)
-  img_url: string;
+  image_url: string;
 
   @Column()
   @Field(() => String)
@@ -39,4 +40,7 @@ export class Product {
   @Column()
   @Field(() => Int)
   stock: number;
+
+  @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
+  orders_products: OrderProduct[];
 }
