@@ -1,7 +1,7 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
 
-import { IOrderDTO } from '../../dtos';
 import { Order } from '../../entities/Order';
+import { UpdateOrderInput } from '../../graphql/Inputs';
 import { IOrdersRepository } from '../IOrdersRepository';
 
 @EntityRepository(Order)
@@ -17,14 +17,14 @@ export class OrdersRepository implements IOrdersRepository {
   }
 
   public async findById(id: number): Promise<Order | undefined> {
-    return this.repository.findOne({ id });
+    return this.repository.findOne(id);
   }
 
-  public async update(order: IOrderDTO): Promise<Order> {
+  public async update(order: UpdateOrderInput): Promise<UpdateOrderInput> {
     return this.repository.save(order);
   }
 
-  public async create(data: IOrderDTO): Promise<Order> {
+  public async create(data: UpdateOrderInput): Promise<Order> {
     const createOrder = this.repository.create(data);
     await this.repository.save(createOrder);
     return createOrder;

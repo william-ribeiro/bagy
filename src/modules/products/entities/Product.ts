@@ -1,5 +1,5 @@
 import { Field, ID, Int, Float, ObjectType } from 'type-graphql';
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { OrderProduct } from '../../orders/entities/OrderProduct';
 
 @Entity('products')
@@ -7,13 +7,13 @@ import { OrderProduct } from '../../orders/entities/OrderProduct';
 export class Product {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number;
+  readonly id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   created_at: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   updated_at: Date;
 
@@ -29,7 +29,7 @@ export class Product {
   @Field(() => String)
   description: string;
 
-  @Column()
+  @Column('decimal')
   @Field(() => Float)
   weight: number;
 
@@ -41,6 +41,6 @@ export class Product {
   @Field(() => Int)
   stock: number;
 
-  @OneToMany(() => OrderProduct, (orderProduct) => orderProduct.product)
-  orders_products: OrderProduct[];
+  @ManyToOne(() => OrderProduct, (orderProduct) => orderProduct.products)
+  order_product: OrderProduct;
 }

@@ -1,13 +1,14 @@
-import { resolve } from 'path';
+const path = require('path');
 
 const development = {
   type: 'sqlite',
-  database: resolve(__dirname, 'src', 'database', 'db', 'bagy.sqlite'),
-  migrations: [resolve(__dirname, 'src', 'database', 'migrations', '*.ts')],
-  entities: [resolve(__dirname, 'src', 'modules', '**', '*.ts')],
+  database: path.resolve(__dirname, 'src', 'database', 'db', 'bagy.sqlite'),
+  migrations: [path.resolve(__dirname, 'src', 'database', 'migrations', '*.ts')],
+  entities: [path.resolve(__dirname, 'src', 'modules', '**', '*.ts')],
   cli: {
-    migrationsDir: resolve(__dirname, 'src', 'database', 'migrations'),
+    migrationsDir: path.resolve(__dirname, 'src', 'database', 'migrations'),
   },
+  synchronize: true,
 };
 
 const production = {
@@ -36,4 +37,4 @@ switch (process.env.NODE_ENV) {
     config = development;
     break;
 }
-export default config;
+module.exports = config;

@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -16,13 +17,13 @@ import { Order } from './Order';
 export class OrderProduct {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number;
+  readonly id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   created_at: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   updated_at: Date;
 
@@ -30,7 +31,7 @@ export class OrderProduct {
   @Field(() => Int)
   order_id: number;
 
-  @ManyToOne(() => Order)
+  @ManyToOne(() => Order, (order) => order.orders_products)
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
@@ -38,15 +39,16 @@ export class OrderProduct {
   @Field(() => Int)
   product_id: number;
 
-  @ManyToOne(() => Product)
+  @OneToMany(() => Product, (product) => product.order_product)
   @JoinColumn({ name: 'product_id' })
-  product: Product;
+  @Field(() => [Product])
+  products: Product[];
 
-  @Column()
+  @Column('int')
   @Field(() => Int)
   quantity: number;
 
-  @Column()
+  @Column('decimal')
   @Field(() => Float)
   price: number;
 }

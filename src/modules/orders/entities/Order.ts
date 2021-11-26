@@ -1,4 +1,4 @@
-import { Field, ID, Int, ObjectType } from 'type-graphql';
+import { Field, Float, ID, Int, ObjectType } from 'type-graphql';
 import {
   Column,
   CreateDateColumn,
@@ -17,20 +17,21 @@ import { OrderProduct } from './OrderProduct';
 export class Order {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number;
+  readonly id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   created_at: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
   updated_at: Date;
 
   @Column()
+  @Field(() => Int)
   customer_id: number;
 
-  @ManyToOne(() => Customer, { eager: true })
+  @ManyToOne(() => Customer, (customer) => customer.orders, { cascade: true, eager: true })
   @JoinColumn({ name: 'customer_id' })
   @Field(() => Customer)
   customer: Customer;
@@ -39,13 +40,20 @@ export class Order {
     cascade: true,
     eager: true,
   })
-  products: OrderProduct[];
+  @Field(() => [OrderProduct])
+  orders_products: OrderProduct[];
 
   @Column()
   @Field(() => Int)
   installments: number;
 
+  total_installments?: number;
+
+  @Column('decimal')
+  @Field(() => Float)
+  total: number;
+
   @Column()
-  @Field({ description: "'request' | 'in_progress' | 'recused' | 'delivered' | 'cancelled'" })
+  @Field()
   status: 'request' | 'in_progress' | 'recused' | 'delivered' | 'cancelled';
 }

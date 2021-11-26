@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import './shared/container';
-import { cconnection } from './database';
+import { Connection } from './database';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
@@ -11,7 +11,7 @@ import { ProductsResolvers } from './modules/products/graphql/ProductResolvers';
 import { OrderResolvers } from './modules/orders/graphql/OrderResolvers';
 
 async function bootstrap() {
-  cconnection();
+  Connection();
   const schema = await buildSchema({
     resolvers: [CustomerResolvers, ProductsResolvers, OrderResolvers],
   });

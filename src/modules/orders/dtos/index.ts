@@ -1,8 +1,10 @@
-import { OrderInput } from '../graphql/Inputs';
+import { Product } from '../../products/entities/Product';
 
-export interface IOrderDTO extends OrderInput {
+export interface IOrderDTO {
   id?: number;
-
-  created_at?: string;
-  updated_at?: string;
+  costumer_id?: number;
+  products: Product[];
+  installments: number;
+  total?: number;
+  status?: 'request' | 'in_progress' | 'recused' | 'delivered' | 'cancelled';
 }

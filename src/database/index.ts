@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
 
-const cconnection = async (): Promise<void> => {
-  const connection = await createConnection();
-  await connection.synchronize();
+const Connection = async (): Promise<void> => {
+  const getConnection = await createConnection();
+  await getConnection.synchronize();
 };
-export { cconnection };
+export { Connection };

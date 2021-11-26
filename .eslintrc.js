@@ -46,6 +46,7 @@ module.exports = {
     semi: ['error', 'always'],
     'no-empty-function': 'off',
     strictPropertyInitialization: 'off',
+    'prefer-const': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
@@ -68,5 +69,3 @@ module.exports = {
     },
   },
 };
-//"project": "./**/tsconfig.json",
-//"tsconfigRootDir": "__dirname",
