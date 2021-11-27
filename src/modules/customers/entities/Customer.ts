@@ -7,15 +7,15 @@ import { Order } from '../../orders/entities/Order';
 export class Customer {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  readonly id: number;
+  readonly id?: number;
 
   @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
-  created_at: Date;
+  created_at?: Date;
 
   @CreateDateColumn({ type: 'datetime' })
   @Field(() => Date)
-  updated_at: Date;
+  updated_at?: Date;
 
   @Column()
   @Field(() => String)
@@ -62,5 +62,5 @@ export class Customer {
   country: string | null = null;
 
   @OneToMany(() => Order, (order) => order.customer)
-  orders: Order[];
+  orders?: Order[];
 }

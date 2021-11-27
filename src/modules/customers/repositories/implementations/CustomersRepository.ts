@@ -1,4 +1,5 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
+
 import { ICustomerDTO } from '../../dtos';
 import { Customer } from '../../entities/Customer';
 import { ICustomersRepository } from '../ICustomersRepository';
@@ -19,11 +20,17 @@ export class CustomersRepository implements ICustomersRepository {
     return this.repository.findOne({ email });
   }
 
+  public async findByCpf(cpf: string): Promise<Customer | undefined> {
+    return this.repository.findOne({ cpf });
+  }
+
   public async findById(id: number): Promise<Customer | undefined> {
     return this.repository.findOne({ id });
   }
 
   public async update(customer: ICustomerDTO): Promise<Customer> {
+    await this.repository.update(customer.id, customer);
+
     return this.repository.save(customer);
   }
 
@@ -34,6 +41,6 @@ export class CustomersRepository implements ICustomersRepository {
   }
 
   public async delete(id: number): Promise<boolean> {
-    return !!(await this.repository.delete(id));
+    return !!(await this.repository.delete({ id }));
   }
 }

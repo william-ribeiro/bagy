@@ -1,0 +1,17 @@
+query GetProducts {
+  allProducts {
+    id
+    name
+    description
+    stock
+  }
+}
+
+query GetProductById {
+  product(productId: 1) {
+    name
+    description
+    stock
+    price
+  }
+}

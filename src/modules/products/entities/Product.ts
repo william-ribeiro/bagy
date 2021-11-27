@@ -1,5 +1,6 @@
 import { Field, ID, Int, Float, ObjectType } from 'type-graphql';
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
 import { OrderProduct } from '../../orders/entities/OrderProduct';
 
 @Entity('products')

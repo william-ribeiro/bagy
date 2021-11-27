@@ -1,7 +1,9 @@
 import { container } from 'tsyringe';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+
 import { Customer } from '../entities/Customer';
 import { CustomerInput } from './CustomerInput';
+
 import { CustomersRepository } from '../repositories/implementations/CustomersRepository';
 import { CreateCustomerUseCase } from '../useCases/CreateCustomerUseCase';
 import { UpdateCustomerUseCase } from '../useCases/UpdateCustomerUseCase';

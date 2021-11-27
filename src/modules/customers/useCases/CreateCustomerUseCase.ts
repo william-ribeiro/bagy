@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+
 import { AppError } from '../../../errors/AppError';
 import { ICustomerDTO } from '../dtos';
 import { Customer } from '../entities/Customer';

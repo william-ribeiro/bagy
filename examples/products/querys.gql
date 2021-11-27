@@ -1,0 +1,32 @@
+query GetOrders {
+  allOrders {
+    customer {
+      name
+    }
+    orders_products {
+      order_id
+      product_id
+      quantity
+    }
+    total
+    installments
+    status
+  }
+}
+
+query GetOrderBy {
+  order(orderId: 1) {
+    id
+    created_at
+    customer {
+      name
+    }
+    orders_products {
+      product_id
+      quantity
+    }
+    status
+    total
+    installments
+  }
+}

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import './shared/container';
+
 import { Connection } from './database';
 import { buildSchema } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
@@ -17,12 +18,13 @@ async function bootstrap() {
   });
 
   const server = new ApolloServer({
+    introspection: true,
     schema,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
 
   server
-    .listen(4000)
+    .listen(process.env.PORT || 4000)
     .then(({ url }) =>
       console.log(`🚀 The [${process.env.NODE_ENV}] server is running at ${url}graphql`),
     );

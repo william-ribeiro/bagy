@@ -13,7 +13,6 @@
       <img alt="William Ribeiro" src="https://img.shields.io/badge/-WilliamRibeiro-8257e5?style=flat&logo=Linkedin&logoColor=white" />
    </a>
 
-
 </p>
 
 <h4 align="center"> 
@@ -31,7 +30,7 @@
 
 ## 💻 Sobre o projeto
 
-🚀 Bagy - é uma API Grapqhql em NodeJS, com sistemas de compras utilizando um banco de dados sqlite.
+🚀 Bagy - é uma API Graphql em NodeJS, com sistemas de compras utilizando um banco de dados sqlite.
 
 A API foi um desafio prosposto durante o processo seletivo da [Bagy](https://site.bagy.com.br/"), compondo a 3ª fase do processo, o Teste Técnico, com o objetivo de conhecer um pouco melhor o nível técnico dos candidatos.
 
@@ -47,7 +46,21 @@ A API foi um desafio prosposto durante o processo seletivo da [Bagy](https://sit
 
 ---
 
+## ⚙️ Teste online
+
+Clique no link abaixo para testar o backend hospedado no heroku.
+
+<p align="center">
+  <a href="https://bagy.herokuapp.com/graphql" target="_blank"><img src="https://img.icons8.com/color/2x/graphql.png" alt="Run API" height="60px" width="60px"></a>
+</p>
+
+---
+
 ## 🚀 Como executar o projeto
+
+### Para usar a API você precisa ter o Docker instalado
+
+https://docs.docker.com/get-docker/
 
 ```bash
 
@@ -57,22 +70,18 @@ $ git clone git@github.com:william-ribeiro/bagy.git
 # Acesse a pasta do projeto no terminal/cmd
 $ cd bagy
 
-# Instale as dependências
-$ yarn install
-
 # Rode  API via DOCKER
-# irá executar as migrações e iniciar o server
+# irá instalar as dependências, executar as migrações e iniciar a API
 $ yarn docker:start
 
 # Teste a API
 $ http://localhost:4000/graphql
 
+# Para encerrar a API
+$ yarn docker:stop
+
 
 ```
-
-<p align="center">
-  <a href="http://localhost:4000/graphql" target="_blank"><img src="https://img.icons8.com/color/2x/graphql.png" alt="Run API"></a>
-</p>
 
 ---
 

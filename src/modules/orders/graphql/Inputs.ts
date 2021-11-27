@@ -1,28 +1,23 @@
 import { Field, InputType, Int } from 'type-graphql';
-import { Customer } from '../../customers/entities/Customer';
 
 @InputType()
 export class OrderProductInput {
   @Field(() => Int)
-  product_id?: number;
+  product_id: number;
   @Field(() => Int)
-  quantity?: number;
+  quantity: number;
 }
 
 @InputType()
 export class OrderInput {
   @Field(() => Int)
-  customer_id?: number;
+  customer_id: number;
 
-  customer?: Customer;
   @Field(() => Int)
-  installments?: number;
+  installments: number;
 
   @Field(() => [OrderProductInput])
-  products?: OrderProductInput[];
-  total?: number;
-  total_installments?: number;
-  status?: 'request' | 'in_progress' | 'recused' | 'delivered' | 'cancelled';
+  products: OrderProductInput[];
 }
 
 @InputType()

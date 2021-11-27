@@ -1,25 +1,25 @@
 import { inject, injectable } from 'tsyringe';
-import { sendmail } from '../../../config/sendmail';
+
 import { AppError } from '../../../errors/AppError';
 
 import { Order } from '../entities/Order';
-import { OrderInput } from '../graphql/Inputs';
+import { Product } from '../../products/entities/Product';
 
 import { IProductsRepository } from '../../products/repositories/IProductsRepository';
 import { IOrdersRepository } from '../repositories/IOrdersRepository';
+import { IOrdersProductsRepository } from '../repositories/IOrdersProductsRepository';
 
 import { checkCustomer } from '../../../shared/utils/checkCustomer';
 import { checkStock } from '../../../shared/utils/checkStock';
 
-interface IStock {
-  product_id: number;
-  quantity: number;
-}
+import { IOrderDTO } from '../dtos';
 
-export interface IRequest {
-  customer_id: number;
-  installments: number;
-  products: IStock[];
+interface IOrder {
+  order_id?: number;
+  product_id?: number;
+  updateStock?: Product;
+  quantity?: number;
+  total?: number;
 }
 
 @injectable()
@@ -29,66 +29,59 @@ export class CreateOrdertUseCase {
     private productsRepository: IProductsRepository,
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
+    @inject('OrdersProductsRepository')
+    private ordersProductsRepository: IOrdersProductsRepository,
   ) {}
 
-  public async execute(data: OrderInput): Promise<Order> {
-    const { customer_id, installments, products } = data;
+  public async execute(data: IOrderDTO): Promise<Order> {
+    try {
+      const { customer_id, installments, products } = data;
 
-    const getCustomer = await checkCustomer(customer_id);
+      await checkCustomer(customer_id);
 
-    if (!getCustomer) {
-      throw new AppError('Customer does not exits!');
-    }
+      const getProducts = await this.productsRepository.findAll();
 
-    const order = [];
-    const getProducts = await this.productsRepository.findAll();
+      const order: IOrder[] = [];
+      for (const { product_id, quantity } of products) {
+        const verifyProduct = checkStock(getProducts, {
+          product_id,
+          quantity,
+        });
 
-    for (const p of products) {
-      const orderProduct = checkStock(getProducts, {
-        product_id: p.product_id,
-        quantity: p.quantity,
+        const removeStock = verifyProduct.stock - quantity;
+        verifyProduct.stock = removeStock;
+
+        order.push({
+          updateStock: verifyProduct,
+          quantity,
+          total: verifyProduct.price * quantity,
+        });
+      }
+
+      let valorTotal = 0;
+      for (const o of Object.values(order)) {
+        valorTotal += o.total;
+        await this.productsRepository.update(o.updateStock);
+      }
+
+      const makeOrder = await this.ordersRepository.create({
+        customer_id,
+        installments,
+        total: valorTotal,
+        status: 'request',
       });
 
-      if (!orderProduct) {
-        return;
+      for (const p of products) {
+        await this.ordersProductsRepository.create({
+          order_id: makeOrder.id,
+          product_id: p.product_id,
+          quantity: p.quantity,
+        });
       }
-      const { price } = orderProduct;
 
-      order.push({ products: orderProduct, total: price * p.quantity });
+      return makeOrder;
+    } catch (error) {
+      throw new AppError(error);
     }
-
-    let valorTotal = 0;
-
-    let removeStock = products[0].quantity;
-    for (const { products, total } of Object.values(order)) {
-      const currentStock = await this.productsRepository.findById(products.id);
-      products.stock = currentStock.stock - removeStock;
-      await this.productsRepository.update(products);
-      valorTotal += total;
-    }
-
-    // const makeOrder = {
-    //   customer_id,
-    //   installments,
-    //   total: valorTotal,
-    //   status: 'delivered',
-    // };
-
-    const makeOrder = await this.ordersRepository.create({
-      customer_id,
-      products,
-      installments,
-      total: valorTotal,
-      status: 'delivered',
-      customer: getCustomer,
-    });
-    const response = { ...makeOrder, products, total_installments: valorTotal / installments };
-
-    sendmail();
-    console.warn('response', response);
-    console.warn('makeOrder', makeOrder);
-    console.warn('data', data);
-
-    return response;
   }
 }

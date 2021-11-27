@@ -1,0 +1,34 @@
+mutation CreateOrder {
+  creatOrder(
+    orders: {
+      customer_id: 1
+      installments: 5
+      products: [{ product_id: 1, quantity: 500 }, { product_id: 2, quantity: 250 }]
+    }
+  ) {
+    id
+    created_at
+    customer {
+      name
+    }
+    orders_products {
+      order_id
+      product_id
+      quantity
+    }
+    status
+    total
+    installments
+  }
+}
+
+mutation UpdateOrder {
+  updateOrder(orderInput: { order_id: 1, status: "in_progess" }) {
+    id
+    status
+  }
+}
+
+mutation DeleteOrder {
+  deleteOrder(id: 1)
+}

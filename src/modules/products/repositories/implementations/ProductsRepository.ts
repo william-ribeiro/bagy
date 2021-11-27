@@ -1,4 +1,5 @@
 import { EntityRepository, getRepository, Repository } from 'typeorm';
+
 import { IProductDTO } from '../../dtos';
 import { Product } from '../../entities/Product';
 import { IProductsRepository } from '../IProductsRepository';
@@ -24,6 +25,7 @@ export class ProductsRepository implements IProductsRepository {
   }
 
   public async update(product: IProductDTO): Promise<Product> {
+    await this.repository.update(product.id, product);
     return this.repository.save(product);
   }
 

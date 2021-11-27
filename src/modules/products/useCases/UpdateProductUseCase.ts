@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+
 import { AppError } from '../../../errors/AppError';
 import { IProductDTO } from '../dtos';
 import { Product } from '../entities/Product';
@@ -17,6 +18,12 @@ export class UpdateProductUseCase {
     if (!findProduct) {
       throw new AppError('Product not found!', 404);
     }
+
+    const findByName = await this.productsRepository.findByProduct(data.name);
+    if (findByName && findByName.name !== findProduct.name) {
+      throw new AppError('Product already exists', 409);
+    }
+
     const product = await this.productsRepository.update(data);
     return product;
   }

@@ -1,0 +1,27 @@
+mutation CreateCustomer {
+  createCustomer(
+    customerInput: { name: "User example", email: "example@email.com", cpf: "123456879" }
+  ) {
+    id
+    created_at
+    updated_at
+    name
+    email
+    cpf
+  }
+}
+
+mutation UpdateCustomer {
+  updateCustomer(
+    id: 1
+    customerInput: { name: "User Examplea", email: "example2@email.com", cpf: "12345678" }
+  ) {
+    name
+    email
+    cpf
+  }
+}
+
+mutation DeleteCustomer {
+  deleteCustomer(id: 1)
+}

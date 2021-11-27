@@ -1,4 +1,4 @@
-import { Field, ID, Int, Float, ObjectType } from 'type-graphql';
+import { Field, ID, Int, ObjectType } from 'type-graphql';
 import {
   Column,
   CreateDateColumn,
@@ -47,8 +47,4 @@ export class OrderProduct {
   @Column('int')
   @Field(() => Int)
   quantity: number;
-
-  @Column('decimal')
-  @Field(() => Float)
-  price: number;
 }

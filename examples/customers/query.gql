@@ -1,0 +1,16 @@
+query GetCustomers {
+  allCustomers {
+    id
+    name
+    email
+    cpf
+  }
+}
+
+query GetCustomerById {
+  custumer(customerId: 1) {
+    name
+    email
+    cpf
+  }
+}

@@ -1,7 +1,9 @@
 import { container } from 'tsyringe';
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
+
 import { Product } from '../entities/Product';
 import { ProductInput } from './ProductInput';
+
 import { ProductsRepository } from '../repositories/implementations/ProductsRepository';
 import { CreateProductUseCase } from '../useCases/CreateProductUseCase';
 import { UpdateProductUseCase } from '../useCases/UpdateProductUseCase';
@@ -24,9 +26,7 @@ export class ProductsResolvers {
   @Mutation(() => Product, { nullable: true })
   async creatProduct(@Arg('productInput') productInput: ProductInput): Promise<Product> {
     const createProductUseCase = container.resolve(CreateProductUseCase);
-
     const product = await createProductUseCase.execute(productInput);
-
     return product;
   }
 
@@ -36,16 +36,13 @@ export class ProductsResolvers {
     @Arg('id') id: number,
   ): Promise<Product> {
     const updateProductUseCase = container.resolve(UpdateProductUseCase);
-
     const product = await updateProductUseCase.execute({ id, ...productInput });
-
     return product;
   }
 
   @Mutation(() => Boolean)
-  async deleteCProduct(@Arg('id') id: number): Promise<boolean> {
+  async deleteProduct(@Arg('id') id: number): Promise<boolean> {
     const deleteproductUseCase = container.resolve(DeleteProductUseCase);
-
     return !!(await deleteproductUseCase.execute(id));
   }
 }

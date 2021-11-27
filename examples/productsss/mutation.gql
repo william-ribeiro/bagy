@@ -1,0 +1,46 @@
+mutation CreateProduct {
+  creatProduct(
+    productInput: {
+      name: "Product example"
+      image_url: "local.png"
+      description: "Description example"
+      weight: 15.5
+      price: 25.0
+      stock: 1000
+    }
+  ) {
+    id
+    name
+    description
+    image_url
+    weight
+    price
+    stock
+  }
+}
+
+mutation UpdateProduct {
+  updateProduct(
+    id: 1
+    productInput: {
+      name: "Product example"
+      image_url: "local.png"
+      description: "Description example"
+      weight: 20
+      price: 15
+      stock: 1000
+    }
+  ) {
+    id
+    name
+    description
+    image_url
+    weight
+    price
+    stock
+  }
+}
+
+mutation DeleteProduct {
+  deleteProduct(id: 1)
+}
