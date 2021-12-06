@@ -23,7 +23,7 @@ export class OrderResolvers {
 
   @Query(() => [Order])
   async allOrders(): Promise<Order[]> {
-    return await this.ordersRepository.findAll();
+    return this.ordersRepository.findAll();
   }
 
   @Query(() => Order, { nullable: true })
