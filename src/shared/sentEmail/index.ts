@@ -52,7 +52,7 @@ export class SendEmail {
   }
 
   async getProducts(product_id: number): Promise<Product> {
-    return await this.repository.findOne(product_id);
+    return this.repository.findOne(product_id);
   }
 
   async makeTemplate(
@@ -84,7 +84,7 @@ export class SendEmail {
       .map(
         (t) => `
       <tr style="background-color: rgb(255, 255, 255)">
-      <td style="width: 48px;border-width: 1px; border-style: solid; border-color: rgb(171, 171, 171);          
+      <td style="width: 48px;border-width: 1px; border-style: solid; border-color: rgb(171, 171, 171);
         box-sizing: border-box; word-break: break-word; white-space: normal;"> ${count++}
       </td>
       <td style="width: 272px; height: 26px; border-width: 1px; border-style: solid; border-color:
@@ -92,19 +92,19 @@ export class SendEmail {
           ${t.name}
       </td>
       <td style="width: 442px;border-width: 1px; border-style: solid; border-color:
-        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;"> 
+        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
         ${t.description}
       </td>
       <td style="width: 164px;border-width: 1px; border-style: solid; border-color:
-        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;"> 
+        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
         ${t.formatPrice}
       </td>
       <td style="width: 164px;border-width: 1px; border-style: solid; border-color:
-        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;"> 
+        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
         ${t.quantity}
       </td>
       <td style="width: 264px;border-width: 1px; border-style: solid; border-color:
-        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;"> 
+        rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
         ${t.formatTotal}
       </td>
     </tr>
@@ -127,20 +127,20 @@ export class SendEmail {
                 <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
                   <span style="font-size: 14pt"><b>Olá ${name}!</b></span>
               </div>
-                <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);"> 
+                <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
                   <br />
                 <div>
               <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
                 Estamos enviando as informações do pedido que você efetuou.
               </div>
-              <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);"> 
+              <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
                 <br />
               </div>
               <div style=" font-family: Calibri, Arial, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
                 <u>PEDIDO: ${order_id}</u><br /><br />
                 <table cellspacing="0" cellpadding="1" style=" text-align: center; border-collapse: collapse;
                   box-sizing: border-box; width: 927px;">
-                  <tbody> 
+                  <tbody>
                     <tr style="background-color: rgb(255, 255, 255)">
                       <td style=" width: 48px; height: 25px;border-width: 1px; border-style: solid; border-color: rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
                         <b style="background-color: rgb(255, 255, 255)">Nr.</b>
@@ -164,11 +164,11 @@ export class SendEmail {
   
                     ${records}
                    
-                    <td  COLSPAN="5" style="  width: 48px; height: 25px;border-width: 1px; 
+                    <td  COLSPAN="5" style="  width: 48px; height: 25px;border-width: 1px;
                       border-style:  solid; border-color: rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
                       <b>Valor Total</b>
                     </td>
-                    <td style=" width: 264px; height: 25px;border-width: 1px; border-style: 
+                    <td style=" width: 264px; height: 25px;border-width: 1px; border-style:
                       solid; border-color: rgb(171, 171, 171); box-sizing: border-box; word-break: break-word; white-space: normal;">
                       <b>${total}</b><br />
                     </td>
