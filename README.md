@@ -3,6 +3,7 @@
   </a>
   
 <p align="center">	
+<a href="https://www.codefactor.io/repository/github/william-ribeiro/bagy"><img src="https://www.codefactor.io/repository/github/william-ribeiro/bagy/badge" alt="CodeFactor" /></a>
  <img alt="License" src="https://img.shields.io/badge/license-MIT-8257E5">  <img alt="Repository size" src="https://img.shields.io/github/repo-size/william-ribeiro/bagy?color=774DD6" > 
   <a href="https://github.com/william-ribeiro/bagy/commits/develop">  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/william-ribeiro/bagy?color=774DD6">
   </a> 
@@ -12,7 +13,6 @@
      <a href="https://www.linkedin.com/in/william-ribeiro-0b5ab911a/">
       <img alt="William Ribeiro" src="https://img.shields.io/badge/-WilliamRibeiro-8257e5?style=flat&logo=Linkedin&logoColor=white" />
    </a>
-
 </p>
 
 <h4 align="center"> 
